@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "homesensormonitor",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "/mnt/c/Users/katsu/Personal/AWS_Amplify/home_sensor_monitor/amplify/backend/api/homesensormonitor/schema.graphql",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 7
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "AMAZON_COGNITO_USER_POOLS",
+        "cognitoUserPoolId": "authhomesensormonitorf5d63376"
+      }
+    ]
+  }
+}

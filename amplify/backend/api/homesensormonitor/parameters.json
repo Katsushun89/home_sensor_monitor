@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "homesensormonitor",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authhomesensormonitorf5d63376",
+      "Outputs.UserPoolId"
+    ]
+  }
+}

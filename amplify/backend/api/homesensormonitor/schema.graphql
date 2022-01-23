@@ -1,0 +1,19 @@
+type Envsensor
+  @model(
+    mutations: null
+    subscriptions: null
+    timestamps: null
+  )
+  @auth(rules: [
+  { allow: public, operations: [read]}
+  { allow: owner }
+  ]) {
+  id: ID!
+  type: String! @index(name: "byTimestamp", queryField: "byTimestamp", sortKeyFields: ["timestamp"])
+  deviceid: String!
+  timestamp: Float!
+  illuminance: Float!
+  power: Int!
+  humidity: Float!
+  temperature: Float!
+}

@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-homesensormonitor-dev-111921-authRole",
+      "UnauthRoleArn": "arn:aws:iam::273191751151:role/amplify-homesensormonitor-dev-111921-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::273191751151:role/amplify-homesensormonitor-dev-111921-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-homesensormonitor-dev-111921-deployment",
+      "UnauthRoleName": "amplify-homesensormonitor-dev-111921-unauthRole",
+      "StackName": "amplify-homesensormonitor-dev-111921",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:273191751151:stack/amplify-homesensormonitor-dev-111921/e3859f90-7bf2-11ec-8f76-06675408ad07",
+      "AmplifyAppId": "dclpz56uur3d"
+    },
+    "categories": {
+      "auth": {
+        "homesensormonitorf5d63376": {}
+      }
+    }
+  }
+}
