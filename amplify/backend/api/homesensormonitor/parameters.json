@@ -7,5 +7,7 @@
       "authhomesensormonitorf5d63376",
       "Outputs.UserPoolId"
     ]
-  }
+  },
+  "APIKeyExpirationEpoch": "-1",
+  "AuthModeLastUpdated": "2022-02-23T13:19:43.213Z"
 }

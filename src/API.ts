@@ -2,9 +2,8 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type Envsensor = {
-  __typename: "Envsensor",
-  id: string,
+export type CreateEnvsensorInput = {
+  id?: string | null,
   type: string,
   deviceid: string,
   timestamp: number,
@@ -12,24 +11,22 @@ export type Envsensor = {
   power: number,
   humidity: number,
   temperature: number,
-  owner?: string | null,
 };
 
-export type ModelEnvsensorFilterInput = {
-  id?: ModelIDInput | null,
+export type ModelEnvsensorConditionInput = {
   type?: ModelStringInput | null,
   deviceid?: ModelStringInput | null,
-  timestamp?: ModelFloatInput | null,
+  timestamp?: ModelIntInput | null,
   illuminance?: ModelFloatInput | null,
   power?: ModelIntInput | null,
   humidity?: ModelFloatInput | null,
   temperature?: ModelFloatInput | null,
-  and?: Array< ModelEnvsensorFilterInput | null > | null,
-  or?: Array< ModelEnvsensorFilterInput | null > | null,
-  not?: ModelEnvsensorFilterInput | null,
+  and?: Array< ModelEnvsensorConditionInput | null > | null,
+  or?: Array< ModelEnvsensorConditionInput | null > | null,
+  not?: ModelEnvsensorConditionInput | null,
 };
 
-export type ModelIDInput = {
+export type ModelStringInput = {
   ne?: string | null,
   eq?: string | null,
   le?: string | null,
@@ -69,7 +66,75 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type ModelStringInput = {
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type ModelFloatInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type Envsensor = {
+  __typename: "Envsensor",
+  id: string,
+  type: string,
+  deviceid: string,
+  timestamp: number,
+  illuminance: number,
+  power: number,
+  humidity: number,
+  temperature: number,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export type DeleteEnvsensorInput = {
+  id: string,
+};
+
+export type UpdateEnvsensorInput = {
+  id: string,
+  type?: string | null,
+  deviceid?: string | null,
+  timestamp?: number | null,
+  illuminance?: number | null,
+  power?: number | null,
+  humidity?: number | null,
+  temperature?: number | null,
+};
+
+export type ModelEnvsensorFilterInput = {
+  id?: ModelIDInput | null,
+  type?: ModelStringInput | null,
+  deviceid?: ModelStringInput | null,
+  timestamp?: ModelIntInput | null,
+  illuminance?: ModelFloatInput | null,
+  power?: ModelIntInput | null,
+  humidity?: ModelFloatInput | null,
+  temperature?: ModelFloatInput | null,
+  and?: Array< ModelEnvsensorFilterInput | null > | null,
+  or?: Array< ModelEnvsensorFilterInput | null > | null,
+  not?: ModelEnvsensorFilterInput | null,
+};
+
+export type ModelIDInput = {
   ne?: string | null,
   eq?: string | null,
   le?: string | null,
@@ -85,37 +150,13 @@ export type ModelStringInput = {
   size?: ModelSizeInput | null,
 };
 
-export type ModelFloatInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-};
-
-export type ModelIntInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-};
-
 export type ModelEnvsensorConnection = {
   __typename: "ModelEnvsensorConnection",
   items:  Array<Envsensor | null >,
   nextToken?: string | null,
 };
 
-export type ModelFloatKeyConditionInput = {
+export type ModelIntKeyConditionInput = {
   eq?: number | null,
   le?: number | null,
   lt?: number | null,
@@ -129,6 +170,72 @@ export enum ModelSortDirection {
   DESC = "DESC",
 }
 
+
+export type CreateEnvsensorMutationVariables = {
+  input: CreateEnvsensorInput,
+  condition?: ModelEnvsensorConditionInput | null,
+};
+
+export type CreateEnvsensorMutation = {
+  createEnvsensor?:  {
+    __typename: "Envsensor",
+    id: string,
+    type: string,
+    deviceid: string,
+    timestamp: number,
+    illuminance: number,
+    power: number,
+    humidity: number,
+    temperature: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeleteEnvsensorMutationVariables = {
+  input: DeleteEnvsensorInput,
+  condition?: ModelEnvsensorConditionInput | null,
+};
+
+export type DeleteEnvsensorMutation = {
+  deleteEnvsensor?:  {
+    __typename: "Envsensor",
+    id: string,
+    type: string,
+    deviceid: string,
+    timestamp: number,
+    illuminance: number,
+    power: number,
+    humidity: number,
+    temperature: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdateEnvsensorMutationVariables = {
+  input: UpdateEnvsensorInput,
+  condition?: ModelEnvsensorConditionInput | null,
+};
+
+export type UpdateEnvsensorMutation = {
+  updateEnvsensor?:  {
+    __typename: "Envsensor",
+    id: string,
+    type: string,
+    deviceid: string,
+    timestamp: number,
+    illuminance: number,
+    power: number,
+    humidity: number,
+    temperature: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
 
 export type GetEnvsensorQueryVariables = {
   id: string,
@@ -145,6 +252,8 @@ export type GetEnvsensorQuery = {
     power: number,
     humidity: number,
     temperature: number,
+    createdAt: string,
+    updatedAt: string,
     owner?: string | null,
   } | null,
 };
@@ -168,6 +277,8 @@ export type ListEnvsensorsQuery = {
       power: number,
       humidity: number,
       temperature: number,
+      createdAt: string,
+      updatedAt: string,
       owner?: string | null,
     } | null >,
     nextToken?: string | null,
@@ -176,7 +287,7 @@ export type ListEnvsensorsQuery = {
 
 export type ByTimestampQueryVariables = {
   type?: string | null,
-  timestamp?: ModelFloatKeyConditionInput | null,
+  timestamp?: ModelIntKeyConditionInput | null,
   sortDirection?: ModelSortDirection | null,
   filter?: ModelEnvsensorFilterInput | null,
   limit?: number | null,
@@ -196,8 +307,73 @@ export type ByTimestampQuery = {
       power: number,
       humidity: number,
       temperature: number,
+      createdAt: string,
+      updatedAt: string,
       owner?: string | null,
     } | null >,
     nextToken?: string | null,
+  } | null,
+};
+
+export type OnCreateEnvsensorSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnCreateEnvsensorSubscription = {
+  onCreateEnvsensor?:  {
+    __typename: "Envsensor",
+    id: string,
+    type: string,
+    deviceid: string,
+    timestamp: number,
+    illuminance: number,
+    power: number,
+    humidity: number,
+    temperature: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateEnvsensorSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnUpdateEnvsensorSubscription = {
+  onUpdateEnvsensor?:  {
+    __typename: "Envsensor",
+    id: string,
+    type: string,
+    deviceid: string,
+    timestamp: number,
+    illuminance: number,
+    power: number,
+    humidity: number,
+    temperature: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteEnvsensorSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnDeleteEnvsensorSubscription = {
+  onDeleteEnvsensor?:  {
+    __typename: "Envsensor",
+    id: string,
+    type: string,
+    deviceid: string,
+    timestamp: number,
+    illuminance: number,
+    power: number,
+    humidity: number,
+    temperature: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
   } | null,
 };

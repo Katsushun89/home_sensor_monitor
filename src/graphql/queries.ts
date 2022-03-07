@@ -13,6 +13,8 @@ export const getEnvsensor = /* GraphQL */ `
       power
       humidity
       temperature
+      createdAt
+      updatedAt
       owner
     }
   }
@@ -33,6 +35,8 @@ export const listEnvsensors = /* GraphQL */ `
         power
         humidity
         temperature
+        createdAt
+        updatedAt
         owner
       }
       nextToken
@@ -42,7 +46,7 @@ export const listEnvsensors = /* GraphQL */ `
 export const byTimestamp = /* GraphQL */ `
   query ByTimestamp(
     $type: String
-    $timestamp: ModelFloatKeyConditionInput
+    $timestamp: ModelIntKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelEnvsensorFilterInput
     $limit: Int
@@ -65,6 +69,8 @@ export const byTimestamp = /* GraphQL */ `
         power
         humidity
         temperature
+        createdAt
+        updatedAt
         owner
       }
       nextToken
