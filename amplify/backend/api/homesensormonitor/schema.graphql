@@ -1,7 +1,7 @@
 type Envsensor
   @model
   @auth(rules: [
-  { allow: private, provider: iam, operations: [read, update] }
+  { allow: private, provider: iam, operations: [create, read, update] }
   { allow: owner }
   ]) {
   id: ID!

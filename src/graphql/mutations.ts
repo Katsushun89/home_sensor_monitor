@@ -22,12 +22,12 @@ export const createEnvsensor = /* GraphQL */ `
     }
   }
 `;
-export const deleteEnvsensor = /* GraphQL */ `
-  mutation DeleteEnvsensor(
-    $input: DeleteEnvsensorInput!
+export const updateEnvsensor = /* GraphQL */ `
+  mutation UpdateEnvsensor(
+    $input: UpdateEnvsensorInput!
     $condition: ModelEnvsensorConditionInput
   ) {
-    deleteEnvsensor(input: $input, condition: $condition) {
+    updateEnvsensor(input: $input, condition: $condition) {
       id
       type
       deviceid
@@ -42,12 +42,12 @@ export const deleteEnvsensor = /* GraphQL */ `
     }
   }
 `;
-export const updateEnvsensor = /* GraphQL */ `
-  mutation UpdateEnvsensor(
-    $input: UpdateEnvsensorInput!
+export const deleteEnvsensor = /* GraphQL */ `
+  mutation DeleteEnvsensor(
+    $input: DeleteEnvsensorInput!
     $condition: ModelEnvsensorConditionInput
   ) {
-    updateEnvsensor(input: $input, condition: $condition) {
+    deleteEnvsensor(input: $input, condition: $condition) {
       id
       type
       deviceid

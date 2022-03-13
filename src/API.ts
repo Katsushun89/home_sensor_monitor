@@ -105,10 +105,6 @@ export type Envsensor = {
   owner?: string | null,
 };
 
-export type DeleteEnvsensorInput = {
-  id: string,
-};
-
 export type UpdateEnvsensorInput = {
   id: string,
   type?: string | null,
@@ -118,6 +114,10 @@ export type UpdateEnvsensorInput = {
   power?: number | null,
   humidity?: number | null,
   temperature?: number | null,
+};
+
+export type DeleteEnvsensorInput = {
+  id: string,
 };
 
 export type ModelEnvsensorFilterInput = {
@@ -193,13 +193,13 @@ export type CreateEnvsensorMutation = {
   } | null,
 };
 
-export type DeleteEnvsensorMutationVariables = {
-  input: DeleteEnvsensorInput,
+export type UpdateEnvsensorMutationVariables = {
+  input: UpdateEnvsensorInput,
   condition?: ModelEnvsensorConditionInput | null,
 };
 
-export type DeleteEnvsensorMutation = {
-  deleteEnvsensor?:  {
+export type UpdateEnvsensorMutation = {
+  updateEnvsensor?:  {
     __typename: "Envsensor",
     id: string,
     type: string,
@@ -215,13 +215,13 @@ export type DeleteEnvsensorMutation = {
   } | null,
 };
 
-export type UpdateEnvsensorMutationVariables = {
-  input: UpdateEnvsensorInput,
+export type DeleteEnvsensorMutationVariables = {
+  input: DeleteEnvsensorInput,
   condition?: ModelEnvsensorConditionInput | null,
 };
 
-export type UpdateEnvsensorMutation = {
-  updateEnvsensor?:  {
+export type DeleteEnvsensorMutation = {
+  deleteEnvsensor?:  {
     __typename: "Envsensor",
     id: string,
     type: string,
