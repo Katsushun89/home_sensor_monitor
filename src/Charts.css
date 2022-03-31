@@ -1,0 +1,14 @@
+.Charts {
+    margin: 0 40px 20px 35px;
+
+}
+
+@media (max-width: 600px){
+    .Chart {
+        margin: 0 8px 25px 5px;
+    }
+}
+
+.apexcharts-toolbar .apexcharts-element-hidden {
+    display: none;
+}
