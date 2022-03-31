@@ -1,57 +1,105 @@
-import React, { useEffect, useState } from 'react'
-import { GraphQLResult } from "@aws-amplify/api-graphql";
-import Amplify, { API, graphqlOperation } from 'aws-amplify'
-import * as queries from './graphql/queries';
-import {
-    Envsensor,
-    ListEnvsensorsQueryVariables,
-    ListEnvsensorsQuery,
-    ByTimestampQueryVariables,
-    ByTimestampQuery,
-} from './API'
+import React, { useEffect, useMemo } from 'react';
+import Chart from 'react-apexcharts';
+import ApexCharts, { ApexOptions } from 'apexcharts';
+import jaLocale from 'apexcharts/dist/locales/ja.json';
 import './Charts.css';
+import { useEnvsensors } from './useEnvsensors';
+import { isPropertySignature } from 'typescript';
+import { Envsensor } from './API';
+import { IconRoomService } from '@aws-amplify/ui-react';
+
+const chartHeight = '40%';
+
+const deviceIdToRoom = {
+    'palamb0001': '寝室'
+};
+
+const getCommonOptions = () : ApexOptions => ({
+    chart: {
+        group: 'chart-group',
+        height: chartHeight,
+        locales: [jaLocale],
+        defaultLocale: 'ja',
+        zoom: {
+            enabled: false
+        },
+        animations: {
+            easing: 'easeinout',
+            animateGradually: {
+            enabled: false,
+            },
+            dynamicAnimation: {
+                speed: 100,
+            },
+        }
+    },
+    tooltip: {
+        x: {
+            format: "yyyy/MM/dd HH:mm"
+        },
+    },
+    xaxis: {
+        type: "datetime",
+    },
+    yaxis: {
+        labels: {
+            minWidth: 30,
+        },
+        decimalsInFloat: 0,
+    },
+    legend: {
+        position: 'top',
+        horizontalAlign: 'left',
+    },
+});
+
+const getSeries = (
+    envsensors: readonly Envsensor[],
+    field: 'temperature' | 'humidity'
+) =>
+    Object.entries(deviceIdToRoom).map(([deviceId, room]) => ({
+        name: room,
+        data: envsensors
+            .filter((m) => m.deviceid === deviceId)
+            .map((m) => [m.timestamp, m[field]]),
+    }));
 
 const Charts = () => {
-  const [envsensors, setEnvsensors] = useState<readonly Envsensor[]>([])
+    const { envsensors, requestEnvsensors } = useEnvsensors();
 
-  useEffect(() => {
-    fetchList()
-  }, [])
+    useEffect(() => {
+        requestEnvsensors();
+    }, [requestEnvsensors]);
 
-  async function fetchList() {
-    try {
-        /*
-        const variables = {
-            type: 'Envsensor',
-            limit: 500
-        } as ListEnvsensorsQueryVariables
+    const commonOptions = useMemo(() => getCommonOptions(), []);
 
-        const { data } = (await API.graphql(
-            graphqlOperation(queries.listEnvsensors, variables)
-        )) as GraphQLResult<ListEnvsensorsQuery>;
-*/
-
-        const variables = {
-            type: 'Envsensor',
-            limit: 500,
-            sortDirection: 'ASC'
-        } as ByTimestampQueryVariables
-
-        const { data } = (await API.graphql(
-            graphqlOperation(queries.byTimestamp, variables)
-        )) as GraphQLResult<ByTimestampQuery>;
-        
-        console.log(data);
-        const envsensor = ((data?.byTimestamp?.items?.filter(Boolean)) as readonly Envsensor[]) ?? []
-        setEnvsensors(envsensor)
-        console.log(envsensor)
-    } catch (err) { console.log('error fetching envSensors') }
-  }
-
-  return (
-    <div>
-        <h2>listEnvsensors</h2>
-    </div>
+    return (
+      <>
+            <Chart
+                className="Chart"
+                options={{
+                    ...commonOptions,
+                    chart: {
+                        ...commonOptions.chart,
+                        id: 'temperature-chart',
+                    },
+                    yaxis: {
+                        ...commonOptions.yaxis,
+                        title: {
+                            text: '温度[℃]',
+                        },
+                    },
+                    tooltip: {
+                        ...commonOptions.tooltip,
+                        y: {
+                            formatter: (value) => `${value.toFixed(1)}℃`,
+                        },
+                    },
+                }}
+                series={ getSeries(envsensors, 'temperature') as ApexAxisChartSeries}
+                hegit={chartHeight}
+            />
+      </>
   )
 }
 

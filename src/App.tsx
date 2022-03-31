@@ -15,9 +15,6 @@ return (
     <Authenticator>
         {({ signOut, user }) => (
         <div className="App">
-            <header className="App-header">
-                <h1 className="Title">home-sensor-monitor</h1>
-                </header>
             <Charts/>
             <button onClick={signOut}>Sign out</button>
         </div>
