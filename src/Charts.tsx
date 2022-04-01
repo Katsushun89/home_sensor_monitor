@@ -40,6 +40,13 @@ const getCommonOptions = () : ApexOptions => ({
     },
     xaxis: {
         type: "datetime",
+        title: {
+            text: '日時',
+            offsetY: 3,
+        },
+        labels: {
+            datetimeUTC: false,
+        },
     },
     yaxis: {
         labels: {
@@ -61,7 +68,7 @@ const getSeries = (
         name: room,
         data: envsensors
             .filter((m) => m.deviceid === deviceId)
-            .map((m) => [m.timestamp, m[field]]),
+            .map((m) => [m.timestamp * 1000, m[field]]), //convert javascript unixtime (*1000)
     }));
 
 const Charts = () => {
@@ -99,6 +106,31 @@ const Charts = () => {
                 series={ getSeries(envsensors, 'temperature') as ApexAxisChartSeries}
                 hegit={chartHeight}
             />
+            <Chart
+                className="Chart"
+                options={{
+                    ...commonOptions,
+                    chart: {
+                        ...commonOptions.chart,
+                        id: 'humidity-chart',
+                    },
+                    yaxis: {
+                        ...commonOptions.yaxis,
+                        title: {
+                            text: '湿度[%]',
+                        },
+                    },
+                    tooltip: {
+                        ...commonOptions.tooltip,
+                        y: {
+                            formatter: (value) => `${value.toFixed(1)}%`,
+                        },
+                    },
+                }}
+                series={ getSeries(envsensors, 'humidity') as ApexAxisChartSeries}
+                hegit={chartHeight}
+            />
+
       </>
   )
 }
