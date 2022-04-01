@@ -26,7 +26,7 @@ const getCommonOptions = () : ApexOptions => ({
         animations: {
             easing: 'easeinout',
             animateGradually: {
-            enabled: false,
+                enabled: false,
             },
             dynamicAnimation: {
                 speed: 100,
@@ -62,7 +62,7 @@ const getCommonOptions = () : ApexOptions => ({
 
 const getSeries = (
     envsensors: readonly Envsensor[],
-    field: 'temperature' | 'humidity'
+    field: 'temperature' | 'humidity' | 'illuminance' | 'power'
 ) =>
     Object.entries(deviceIdToRoom).map(([deviceId, room]) => ({
         name: room,
@@ -130,9 +130,56 @@ const Charts = () => {
                 series={ getSeries(envsensors, 'humidity') as ApexAxisChartSeries}
                 hegit={chartHeight}
             />
-
-      </>
-  )
+            <Chart
+                className="Chart"
+                options={{
+                    ...commonOptions,
+                    chart: {
+                        ...commonOptions.chart,
+                        id: 'illuminance-chart',
+                    },
+                    yaxis: {
+                        ...commonOptions.yaxis,
+                        title: {
+                            text: '照度[Lux]',
+                        },
+                    },
+                    tooltip: {
+                        ...commonOptions.tooltip,
+                        y: {
+                            formatter: (value) => `${value.toFixed(1)}Lux`,
+                        },
+                    },
+                }}
+                series={ getSeries(envsensors, 'illuminance') as ApexAxisChartSeries}
+                hegit={chartHeight}
+            />
+            <Chart
+                className="Chart"
+                options={{
+                    ...commonOptions,
+                    chart: {
+                        ...commonOptions.chart,
+                        id: 'power-chart',
+                    },
+                    yaxis: {
+                        ...commonOptions.yaxis,
+                        title: {
+                            text: '電圧[mV]',
+                        },
+                    },
+                    tooltip: {
+                        ...commonOptions.tooltip,
+                        y: {
+                            formatter: (value) => `${value.toFixed(1)}mV`,
+                        },
+                    },
+                }}
+                series={ getSeries(envsensors, 'power') as ApexAxisChartSeries}
+                hegit={chartHeight}
+            />
+        </>
+    )
 }
 
 
