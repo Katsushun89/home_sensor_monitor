@@ -11,7 +11,9 @@ import { IconRoomService } from '@aws-amplify/ui-react';
 const chartHeight = '40%';
 
 const deviceIdToRoom = {
-    'palamb0001': '寝室'
+    'palamb0001': '寝室',
+    'twelaria0002': '玄関',
+    'twelaria0003': 'リビング',
 };
 
 const getCommonOptions = () : ApexOptions => ({
@@ -45,7 +47,7 @@ const getCommonOptions = () : ApexOptions => ({
             offsetY: 3,
         },
         labels: {
-            datetimeUTC: false,
+            datetimeUTC: false, //表示をJSTにする
         },
     },
     yaxis: {
