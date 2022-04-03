@@ -19,7 +19,7 @@ export const useEnvsensors = (): {
 
         const variables = {
             type: 'Envsensor',
-            limit: 500,
+            limit: 1500,
             sortDirection: 'ASC'
         } as ByTimestampQueryVariables
 
