@@ -8,25 +8,32 @@ import {
     ByTimestampQueryVariables,
     ByTimestampQuery,
 } from './API';
+import { timeStamp } from "console";
 
 export const useEnvsensors = (): {
     envsensors: readonly Envsensor[];
-    requestEnvsensors: () => Promise<void>;
+    requestEnvsensors: (from: number, to: number) => Promise<void>;
 } => {
     const [envsensors, setEnvsensors] = useState<readonly Envsensor[]>([]);
+    const now = new Date();
+    const timestampMin = useRef(Math.floor(now.getTime() / 1000));
     
-    const requestEnvsensors = useCallback(async () => {
+    const requestEnvsensors = useCallback(async (from: number, to: number) => {
+        if (from >= timestampMin.current) {
+            return;
+        }
 
         const variables = {
             type: 'Envsensor',
             limit: 1500,
-            sortDirection: 'ASC'
+            sortDirection: 'ASC',
+            timestamp: {between: [from, to]},
         } as ByTimestampQueryVariables
 
         const { data } = (await API.graphql(
             graphqlOperation(queries.byTimestamp, variables)
         )) as GraphQLResult<ByTimestampQuery>;
-      
+
         setEnvsensors((ms) =>
             [
                 ...ms,

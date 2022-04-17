@@ -7,6 +7,7 @@ import { useEnvsensors } from './useEnvsensors';
 import { isPropertySignature } from 'typescript';
 import { Envsensor } from './API';
 import { IconRoomService } from '@aws-amplify/ui-react';
+import subDays from 'date-fns/subDays'
 
 const chartHeight = '40%';
 
@@ -15,6 +16,8 @@ const deviceIdToRoom = {
     'twelaria0002': '玄関',
     'twelaria0003': 'リビング',
 };
+
+const initialDaysRange = 3;
 
 const getCommonOptions = () : ApexOptions => ({
     chart: {
@@ -49,6 +52,7 @@ const getCommonOptions = () : ApexOptions => ({
         labels: {
             datetimeUTC: false, //表示をJSTにする
         },
+        min: subDays(new Date(), initialDaysRange).getTime()
     },
     yaxis: {
         labels: {
@@ -77,7 +81,11 @@ const Charts = () => {
     const { envsensors, requestEnvsensors } = useEnvsensors();
 
     useEffect(() => {
-        requestEnvsensors();
+        const now = new Date();
+        const priviousDay = subDays(now, initialDaysRange);
+
+        requestEnvsensors(Math.floor(priviousDay.getTime() / 1000),
+                            Math.floor(now.getTime() / 1000));
     }, [requestEnvsensors]);
 
     const commonOptions = useMemo(() => getCommonOptions(), []);
