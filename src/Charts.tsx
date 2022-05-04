@@ -6,7 +6,6 @@ import './Charts.css';
 import { useEnvsensors } from './useEnvsensors';
 import { isPropertySignature } from 'typescript';
 import { Envsensor } from './API';
-import { IconRoomService } from '@aws-amplify/ui-react';
 import subDays from 'date-fns/subDays'
 
 const chartHeight = '40%';
