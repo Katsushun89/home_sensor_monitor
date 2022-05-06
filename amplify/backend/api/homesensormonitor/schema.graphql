@@ -14,3 +14,17 @@ type Envsensor
   humidity: Float!
   temperature: Float!
 }
+
+type CO2sensor
+  @model
+  @auth(rules: [
+  { allow: private, provider: iam, operations: [create, read, update] }
+  { allow: private, provider: userPools, operations: [read] }
+  { allow: owner }
+  ]) {
+  id: ID!
+  type: String! @index(name: "byCO2Timestamp", queryField: "byCO2Timestamp", sortKeyFields: ["timestamp"])
+  deviceid: String!
+  timestamp: AWSTimestamp!
+  concentration: Int!
+}

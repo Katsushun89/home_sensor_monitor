@@ -53,3 +53,45 @@ export const onDeleteEnvsensor = /* GraphQL */ `
     }
   }
 `;
+export const onCreateCO2sensor = /* GraphQL */ `
+  subscription OnCreateCO2sensor($owner: String) {
+    onCreateCO2sensor(owner: $owner) {
+      id
+      type
+      deviceid
+      timestamp
+      concentration
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateCO2sensor = /* GraphQL */ `
+  subscription OnUpdateCO2sensor($owner: String) {
+    onUpdateCO2sensor(owner: $owner) {
+      id
+      type
+      deviceid
+      timestamp
+      concentration
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteCO2sensor = /* GraphQL */ `
+  subscription OnDeleteCO2sensor($owner: String) {
+    onDeleteCO2sensor(owner: $owner) {
+      id
+      type
+      deviceid
+      timestamp
+      concentration
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;

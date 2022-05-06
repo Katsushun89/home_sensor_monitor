@@ -62,3 +62,54 @@ export const deleteEnvsensor = /* GraphQL */ `
     }
   }
 `;
+export const createCO2sensor = /* GraphQL */ `
+  mutation CreateCO2sensor(
+    $input: CreateCO2sensorInput!
+    $condition: ModelCO2sensorConditionInput
+  ) {
+    createCO2sensor(input: $input, condition: $condition) {
+      id
+      type
+      deviceid
+      timestamp
+      concentration
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateCO2sensor = /* GraphQL */ `
+  mutation UpdateCO2sensor(
+    $input: UpdateCO2sensorInput!
+    $condition: ModelCO2sensorConditionInput
+  ) {
+    updateCO2sensor(input: $input, condition: $condition) {
+      id
+      type
+      deviceid
+      timestamp
+      concentration
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteCO2sensor = /* GraphQL */ `
+  mutation DeleteCO2sensor(
+    $input: DeleteCO2sensorInput!
+    $condition: ModelCO2sensorConditionInput
+  ) {
+    deleteCO2sensor(input: $input, condition: $condition) {
+      id
+      type
+      deviceid
+      timestamp
+      concentration
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;

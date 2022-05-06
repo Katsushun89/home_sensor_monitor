@@ -120,6 +120,48 @@ export type DeleteEnvsensorInput = {
   id: string,
 };
 
+export type CreateCO2sensorInput = {
+  id?: string | null,
+  type: string,
+  deviceid: string,
+  timestamp: number,
+  concentration: number,
+};
+
+export type ModelCO2sensorConditionInput = {
+  type?: ModelStringInput | null,
+  deviceid?: ModelStringInput | null,
+  timestamp?: ModelIntInput | null,
+  concentration?: ModelIntInput | null,
+  and?: Array< ModelCO2sensorConditionInput | null > | null,
+  or?: Array< ModelCO2sensorConditionInput | null > | null,
+  not?: ModelCO2sensorConditionInput | null,
+};
+
+export type CO2sensor = {
+  __typename: "CO2sensor",
+  id: string,
+  type: string,
+  deviceid: string,
+  timestamp: number,
+  concentration: number,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export type UpdateCO2sensorInput = {
+  id: string,
+  type?: string | null,
+  deviceid?: string | null,
+  timestamp?: number | null,
+  concentration?: number | null,
+};
+
+export type DeleteCO2sensorInput = {
+  id: string,
+};
+
 export type ModelEnvsensorFilterInput = {
   id?: ModelIDInput | null,
   type?: ModelStringInput | null,
@@ -170,6 +212,23 @@ export enum ModelSortDirection {
   DESC = "DESC",
 }
 
+
+export type ModelCO2sensorFilterInput = {
+  id?: ModelIDInput | null,
+  type?: ModelStringInput | null,
+  deviceid?: ModelStringInput | null,
+  timestamp?: ModelIntInput | null,
+  concentration?: ModelIntInput | null,
+  and?: Array< ModelCO2sensorFilterInput | null > | null,
+  or?: Array< ModelCO2sensorFilterInput | null > | null,
+  not?: ModelCO2sensorFilterInput | null,
+};
+
+export type ModelCO2sensorConnection = {
+  __typename: "ModelCO2sensorConnection",
+  items:  Array<CO2sensor | null >,
+  nextToken?: string | null,
+};
 
 export type CreateEnvsensorMutationVariables = {
   input: CreateEnvsensorInput,
@@ -237,6 +296,63 @@ export type DeleteEnvsensorMutation = {
   } | null,
 };
 
+export type CreateCO2sensorMutationVariables = {
+  input: CreateCO2sensorInput,
+  condition?: ModelCO2sensorConditionInput | null,
+};
+
+export type CreateCO2sensorMutation = {
+  createCO2sensor?:  {
+    __typename: "CO2sensor",
+    id: string,
+    type: string,
+    deviceid: string,
+    timestamp: number,
+    concentration: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdateCO2sensorMutationVariables = {
+  input: UpdateCO2sensorInput,
+  condition?: ModelCO2sensorConditionInput | null,
+};
+
+export type UpdateCO2sensorMutation = {
+  updateCO2sensor?:  {
+    __typename: "CO2sensor",
+    id: string,
+    type: string,
+    deviceid: string,
+    timestamp: number,
+    concentration: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeleteCO2sensorMutationVariables = {
+  input: DeleteCO2sensorInput,
+  condition?: ModelCO2sensorConditionInput | null,
+};
+
+export type DeleteCO2sensorMutation = {
+  deleteCO2sensor?:  {
+    __typename: "CO2sensor",
+    id: string,
+    type: string,
+    deviceid: string,
+    timestamp: number,
+    concentration: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
 export type GetEnvsensorQueryVariables = {
   id: string,
 };
@@ -286,7 +402,7 @@ export type ListEnvsensorsQuery = {
 };
 
 export type ByTimestampQueryVariables = {
-  type?: string | null,
+  type: string,
   timestamp?: ModelIntKeyConditionInput | null,
   sortDirection?: ModelSortDirection | null,
   filter?: ModelEnvsensorFilterInput | null,
@@ -307,6 +423,75 @@ export type ByTimestampQuery = {
       power: number,
       humidity: number,
       temperature: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetCO2sensorQueryVariables = {
+  id: string,
+};
+
+export type GetCO2sensorQuery = {
+  getCO2sensor?:  {
+    __typename: "CO2sensor",
+    id: string,
+    type: string,
+    deviceid: string,
+    timestamp: number,
+    concentration: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListCO2sensorsQueryVariables = {
+  filter?: ModelCO2sensorFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListCO2sensorsQuery = {
+  listCO2sensors?:  {
+    __typename: "ModelCO2sensorConnection",
+    items:  Array< {
+      __typename: "CO2sensor",
+      id: string,
+      type: string,
+      deviceid: string,
+      timestamp: number,
+      concentration: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ByCO2TimestampQueryVariables = {
+  type: string,
+  timestamp?: ModelIntKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelCO2sensorFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ByCO2TimestampQuery = {
+  byCO2Timestamp?:  {
+    __typename: "ModelCO2sensorConnection",
+    items:  Array< {
+      __typename: "CO2sensor",
+      id: string,
+      type: string,
+      deviceid: string,
+      timestamp: number,
+      concentration: number,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -372,6 +557,60 @@ export type OnDeleteEnvsensorSubscription = {
     power: number,
     humidity: number,
     temperature: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnCreateCO2sensorSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnCreateCO2sensorSubscription = {
+  onCreateCO2sensor?:  {
+    __typename: "CO2sensor",
+    id: string,
+    type: string,
+    deviceid: string,
+    timestamp: number,
+    concentration: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateCO2sensorSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnUpdateCO2sensorSubscription = {
+  onUpdateCO2sensor?:  {
+    __typename: "CO2sensor",
+    id: string,
+    type: string,
+    deviceid: string,
+    timestamp: number,
+    concentration: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteCO2sensorSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnDeleteCO2sensorSubscription = {
+  onDeleteCO2sensor?:  {
+    __typename: "CO2sensor",
+    id: string,
+    type: string,
+    deviceid: string,
+    timestamp: number,
+    concentration: number,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
