@@ -12,11 +12,14 @@ import subDays from 'date-fns/subDays'
 
 const chartHeight = '40%';
 
-const deviceIdToRoom = {
+const envsensorDeviceIdToRoom = {
     'palamb0001': '寝室',
     'twelaria0002': '玄関',
     'twelaria0003': 'リビング',
     'twelaria0004': '屋外',
+};
+
+const co2sensorDeviceIdToRoom = {
     'co2stickc01': 'リビング',
 };
 
@@ -73,7 +76,7 @@ const getEnvSeries = (
     envsensors: readonly Envsensor[],
     field: 'temperature' | 'humidity' | 'illuminance' | 'power'
 ) =>
-    Object.entries(deviceIdToRoom).map(([deviceId, room]) => ({
+    Object.entries(envsensorDeviceIdToRoom).map(([deviceId, room]) => ({
         name: room,
         data: envsensors
             .filter((m) => m.deviceid === deviceId)
@@ -84,7 +87,7 @@ const getCO2Series = (
     co2sensors: readonly CO2sensor[],
     field: 'concentration'
 ) =>
-    Object.entries(deviceIdToRoom).map(([deviceId, room]) => ({
+    Object.entries(co2sensorDeviceIdToRoom).map(([deviceId, room]) => ({
         name: room,
         data: co2sensors
             .filter((m) => m.deviceid === deviceId)
@@ -187,30 +190,6 @@ const Charts = () => {
                     },
                 }}
                 series={ getCO2Series(co2sensors, 'concentration') as ApexAxisChartSeries}
-                hegit={chartHeight}
-            />
-            <Chart
-                className="Chart"
-                options={{
-                    ...commonOptions,
-                    chart: {
-                        ...commonOptions.chart,
-                        id: 'illuminance-chart',
-                    },
-                    yaxis: {
-                        ...commonOptions.yaxis,
-                        title: {
-                            text: '照度[Lux]',
-                        },
-                    },
-                    tooltip: {
-                        ...commonOptions.tooltip,
-                        y: {
-                            formatter: (value) => `${value.toFixed(1)}Lux`,
-                        },
-                    },
-                }}
-                series={ getEnvSeries(envsensors, 'illuminance') as ApexAxisChartSeries}
                 hegit={chartHeight}
             />
             <Chart
