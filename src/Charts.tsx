@@ -4,8 +4,10 @@ import ApexCharts, { ApexOptions } from 'apexcharts';
 import jaLocale from 'apexcharts/dist/locales/ja.json';
 import './Charts.css';
 import { useEnvsensors } from './useEnvsensors';
+import { useCO2sensors } from './useCO2sensors';
 import { isPropertySignature } from 'typescript';
 import { Envsensor } from './API';
+import { CO2sensor } from './API';
 import subDays from 'date-fns/subDays'
 
 const chartHeight = '40%';
@@ -15,6 +17,7 @@ const deviceIdToRoom = {
     'twelaria0002': '玄関',
     'twelaria0003': 'リビング',
     'twelaria0004': '屋外',
+    'co2stickc01': 'リビング',
 };
 
 const initialDaysRange = 3;
@@ -66,7 +69,7 @@ const getCommonOptions = () : ApexOptions => ({
     },
 });
 
-const getSeries = (
+const getEnvSeries = (
     envsensors: readonly Envsensor[],
     field: 'temperature' | 'humidity' | 'illuminance' | 'power'
 ) =>
@@ -77,16 +80,38 @@ const getSeries = (
             .map((m) => [m.timestamp * 1000, m[field]]), //convert javascript unixtime (*1000)
     }));
 
+const getCO2Series = (
+    co2sensors: readonly CO2sensor[],
+    field: 'concentration'
+) =>
+    Object.entries(deviceIdToRoom).map(([deviceId, room]) => ({
+        name: room,
+        data: co2sensors
+            .filter((m) => m.deviceid === deviceId)
+            .map((m) => [m.timestamp * 1000, m[field]]), //convert javascript unixtime (*1000)
+    }));
+
 const Charts = () => {
     const { envsensors, requestEnvsensors } = useEnvsensors();
+    const { co2sensors, requestCO2sensors } = useCO2sensors();
 
     useEffect(() => {
+        console.log("requestEnvsensors");
         const now = new Date();
         const priviousDay = subDays(now, initialDaysRange);
 
         requestEnvsensors(Math.floor(priviousDay.getTime() / 1000),
                             Math.floor(now.getTime() / 1000));
     }, [requestEnvsensors]);
+
+    useEffect(() => {
+        console.log("requestCO2sensors");
+        const now = new Date();
+        const priviousDay = subDays(now, initialDaysRange);
+
+        requestCO2sensors(Math.floor(priviousDay.getTime() / 1000),
+                            Math.floor(now.getTime() / 1000));
+    }, [requestCO2sensors]);
 
     const commonOptions = useMemo(() => getCommonOptions(), []);
 
@@ -113,7 +138,7 @@ const Charts = () => {
                         },
                     },
                 }}
-                series={ getSeries(envsensors, 'temperature') as ApexAxisChartSeries}
+                series={ getEnvSeries(envsensors, 'temperature') as ApexAxisChartSeries}
                 hegit={chartHeight}
             />
             <Chart
@@ -137,7 +162,31 @@ const Charts = () => {
                         },
                     },
                 }}
-                series={ getSeries(envsensors, 'humidity') as ApexAxisChartSeries}
+                series={ getEnvSeries(envsensors, 'humidity') as ApexAxisChartSeries}
+                hegit={chartHeight}
+            />
+            <Chart
+                className="Chart"
+                options={{
+                    ...commonOptions,
+                    chart: {
+                        ...commonOptions.chart,
+                        id: 'co2-concentration-chart',
+                    },
+                    yaxis: {
+                        ...commonOptions.yaxis,
+                        title: {
+                            text: 'CO2濃度[ppm]',
+                        },
+                    },
+                    tooltip: {
+                        ...commonOptions.tooltip,
+                        y: {
+                            formatter: (value) => `${value.toFixed(1)}ppm`,
+                        },
+                    },
+                }}
+                series={ getCO2Series(co2sensors, 'concentration') as ApexAxisChartSeries}
                 hegit={chartHeight}
             />
             <Chart
@@ -161,7 +210,7 @@ const Charts = () => {
                         },
                     },
                 }}
-                series={ getSeries(envsensors, 'illuminance') as ApexAxisChartSeries}
+                series={ getEnvSeries(envsensors, 'illuminance') as ApexAxisChartSeries}
                 hegit={chartHeight}
             />
             <Chart
@@ -185,7 +234,7 @@ const Charts = () => {
                         },
                     },
                 }}
-                series={ getSeries(envsensors, 'power') as ApexAxisChartSeries}
+                series={ getEnvSeries(envsensors, 'power') as ApexAxisChartSeries}
                 hegit={chartHeight}
             />
         </>
