@@ -162,6 +162,48 @@ export type DeleteCO2sensorInput = {
   id: string,
 };
 
+export type CreatePrssensorInput = {
+  id?: string | null,
+  type: string,
+  deviceid: string,
+  timestamp: number,
+  pressure: number,
+};
+
+export type ModelPrssensorConditionInput = {
+  type?: ModelStringInput | null,
+  deviceid?: ModelStringInput | null,
+  timestamp?: ModelIntInput | null,
+  pressure?: ModelIntInput | null,
+  and?: Array< ModelPrssensorConditionInput | null > | null,
+  or?: Array< ModelPrssensorConditionInput | null > | null,
+  not?: ModelPrssensorConditionInput | null,
+};
+
+export type Prssensor = {
+  __typename: "Prssensor",
+  id: string,
+  type: string,
+  deviceid: string,
+  timestamp: number,
+  pressure: number,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export type UpdatePrssensorInput = {
+  id: string,
+  type?: string | null,
+  deviceid?: string | null,
+  timestamp?: number | null,
+  pressure?: number | null,
+};
+
+export type DeletePrssensorInput = {
+  id: string,
+};
+
 export type ModelEnvsensorFilterInput = {
   id?: ModelIDInput | null,
   type?: ModelStringInput | null,
@@ -227,6 +269,23 @@ export type ModelCO2sensorFilterInput = {
 export type ModelCO2sensorConnection = {
   __typename: "ModelCO2sensorConnection",
   items:  Array<CO2sensor | null >,
+  nextToken?: string | null,
+};
+
+export type ModelPrssensorFilterInput = {
+  id?: ModelIDInput | null,
+  type?: ModelStringInput | null,
+  deviceid?: ModelStringInput | null,
+  timestamp?: ModelIntInput | null,
+  pressure?: ModelIntInput | null,
+  and?: Array< ModelPrssensorFilterInput | null > | null,
+  or?: Array< ModelPrssensorFilterInput | null > | null,
+  not?: ModelPrssensorFilterInput | null,
+};
+
+export type ModelPrssensorConnection = {
+  __typename: "ModelPrssensorConnection",
+  items:  Array<Prssensor | null >,
   nextToken?: string | null,
 };
 
@@ -347,6 +406,63 @@ export type DeleteCO2sensorMutation = {
     deviceid: string,
     timestamp: number,
     concentration: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type CreatePrssensorMutationVariables = {
+  input: CreatePrssensorInput,
+  condition?: ModelPrssensorConditionInput | null,
+};
+
+export type CreatePrssensorMutation = {
+  createPrssensor?:  {
+    __typename: "Prssensor",
+    id: string,
+    type: string,
+    deviceid: string,
+    timestamp: number,
+    pressure: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdatePrssensorMutationVariables = {
+  input: UpdatePrssensorInput,
+  condition?: ModelPrssensorConditionInput | null,
+};
+
+export type UpdatePrssensorMutation = {
+  updatePrssensor?:  {
+    __typename: "Prssensor",
+    id: string,
+    type: string,
+    deviceid: string,
+    timestamp: number,
+    pressure: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeletePrssensorMutationVariables = {
+  input: DeletePrssensorInput,
+  condition?: ModelPrssensorConditionInput | null,
+};
+
+export type DeletePrssensorMutation = {
+  deletePrssensor?:  {
+    __typename: "Prssensor",
+    id: string,
+    type: string,
+    deviceid: string,
+    timestamp: number,
+    pressure: number,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -500,6 +616,75 @@ export type ByCO2TimestampQuery = {
   } | null,
 };
 
+export type GetPrssensorQueryVariables = {
+  id: string,
+};
+
+export type GetPrssensorQuery = {
+  getPrssensor?:  {
+    __typename: "Prssensor",
+    id: string,
+    type: string,
+    deviceid: string,
+    timestamp: number,
+    pressure: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListPrssensorsQueryVariables = {
+  filter?: ModelPrssensorFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListPrssensorsQuery = {
+  listPrssensors?:  {
+    __typename: "ModelPrssensorConnection",
+    items:  Array< {
+      __typename: "Prssensor",
+      id: string,
+      type: string,
+      deviceid: string,
+      timestamp: number,
+      pressure: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ByPrsTimestampQueryVariables = {
+  type: string,
+  timestamp?: ModelIntKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelPrssensorFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ByPrsTimestampQuery = {
+  byPrsTimestamp?:  {
+    __typename: "ModelPrssensorConnection",
+    items:  Array< {
+      __typename: "Prssensor",
+      id: string,
+      type: string,
+      deviceid: string,
+      timestamp: number,
+      pressure: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type OnCreateEnvsensorSubscriptionVariables = {
   owner?: string | null,
 };
@@ -611,6 +796,60 @@ export type OnDeleteCO2sensorSubscription = {
     deviceid: string,
     timestamp: number,
     concentration: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnCreatePrssensorSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnCreatePrssensorSubscription = {
+  onCreatePrssensor?:  {
+    __typename: "Prssensor",
+    id: string,
+    type: string,
+    deviceid: string,
+    timestamp: number,
+    pressure: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdatePrssensorSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnUpdatePrssensorSubscription = {
+  onUpdatePrssensor?:  {
+    __typename: "Prssensor",
+    id: string,
+    type: string,
+    deviceid: string,
+    timestamp: number,
+    pressure: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeletePrssensorSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnDeletePrssensorSubscription = {
+  onDeletePrssensor?:  {
+    __typename: "Prssensor",
+    id: string,
+    type: string,
+    deviceid: string,
+    timestamp: number,
+    pressure: number,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,

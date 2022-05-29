@@ -28,3 +28,17 @@ type CO2sensor
   timestamp: AWSTimestamp!
   concentration: Int!
 }
+
+type Prssensor
+  @model
+  @auth(rules: [
+  { allow: private, provider: iam, operations: [create, read, update] }
+  { allow: private, provider: userPools, operations: [read] }
+  { allow: owner }
+  ]) {
+  id: ID!
+  type: String! @index(name: "byPrsTimestamp", queryField: "byPrsTimestamp", sortKeyFields: ["timestamp"])
+  deviceid: String!
+  timestamp: AWSTimestamp!
+  pressure: Int!
+}

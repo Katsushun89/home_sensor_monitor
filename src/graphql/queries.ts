@@ -143,3 +143,69 @@ export const byCO2Timestamp = /* GraphQL */ `
     }
   }
 `;
+export const getPrssensor = /* GraphQL */ `
+  query GetPrssensor($id: ID!) {
+    getPrssensor(id: $id) {
+      id
+      type
+      deviceid
+      timestamp
+      pressure
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listPrssensors = /* GraphQL */ `
+  query ListPrssensors(
+    $filter: ModelPrssensorFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPrssensors(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        type
+        deviceid
+        timestamp
+        pressure
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const byPrsTimestamp = /* GraphQL */ `
+  query ByPrsTimestamp(
+    $type: String!
+    $timestamp: ModelIntKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPrssensorFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    byPrsTimestamp(
+      type: $type
+      timestamp: $timestamp
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        type
+        deviceid
+        timestamp
+        pressure
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
