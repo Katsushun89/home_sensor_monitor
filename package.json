@@ -5,6 +5,9 @@
   "dependencies": {
     "@aws-amplify/cli": "^8.1.0",
     "@aws-amplify/ui-react": "^3.0.2",
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
+    "@mui/material": "^5.9.3",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^14.1.1",
