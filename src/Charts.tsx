@@ -123,7 +123,8 @@ const Charts = () => {
         const priviousDay = subDays(now, initialDaysRange);
 
         requestEnvsensors(Math.floor(priviousDay.getTime() / 1000),
-                            Math.floor(now.getTime() / 1000));
+            Math.floor(now.getTime() / 1000),
+            500 * Object.keys(envsensorDeviceIdToRoom).length);
     }, [requestEnvsensors]);
 
     useEffect(() => {
@@ -132,7 +133,8 @@ const Charts = () => {
         const priviousDay = subDays(now, initialDaysRange);
 
         requestCO2sensors(Math.floor(priviousDay.getTime() / 1000),
-                            Math.floor(now.getTime() / 1000));
+            Math.floor(now.getTime() / 1000),
+            500 * Object.keys(co2sensorDeviceIdToRoom).length);
     }, [requestCO2sensors]);
 
     useEffect(() => {
@@ -141,7 +143,8 @@ const Charts = () => {
         const priviousDay = subDays(now, initialDaysRange);
 
         requestPrssensors(Math.floor(priviousDay.getTime() / 1000),
-                            Math.floor(now.getTime() / 1000));
+            Math.floor(now.getTime() / 1000),
+            500 * Object.keys(prssensorDeviceIdToRoom).length);
     }, [requestPrssensors]);
 
     const commonOptions = useMemo(() => getCommonOptions(), []);

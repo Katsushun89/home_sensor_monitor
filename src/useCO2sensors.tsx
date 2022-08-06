@@ -12,20 +12,20 @@ import { timeStamp } from "console";
 
 export const useCO2sensors = (): {
     co2sensors: readonly CO2sensor[];
-    requestCO2sensors: (from: number, to: number) => Promise<void>;
+    requestCO2sensors: (from: number, to: number, limit: number) => Promise<void>;
 } => {
     const [co2sensors, setCO2sensors] = useState<readonly CO2sensor[]>([]);
     const now = new Date();
     const timestampMin = useRef(Math.floor(now.getTime() / 1000));
     
-    const requestCO2sensors = useCallback(async (from: number, to: number) => {
+    const requestCO2sensors = useCallback(async (from: number, to: number, limit: number) => {
         if (from >= timestampMin.current) {
             return;
         }
 
         const variables = {
             type: 'CO2sensor',
-            limit: 500,
+            limit: limit,
             sortDirection: 'ASC',
             timestamp: {between: [from, to]},
         } as ByCO2TimestampQueryVariables
