@@ -9,9 +9,9 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
-import CO2s from './CO2s';
 import  { TemperatureChart, HurmidityChart, CO2Chart, PressureChart, SensorPowerChart } from './Charts';
 import RecentTemperatures from './RecentTemperature';
+import RecentCO2 from './RecentCO2';
 
 function Copyright(props: any) {
   return (
@@ -88,7 +88,7 @@ function DashboardContent() {
                     height: 240,
                   }}
                 >
-                  <CO2s />
+                  <RecentCO2 />
                 </Paper>
               </Grid>
 
