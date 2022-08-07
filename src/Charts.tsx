@@ -315,7 +315,7 @@ const SensorPowerChart = () => {
 
     return (
     <React.Fragment>
-      <Title>Sensor Battery Voltage</Title>
+      <Title>センサーバッテリー電圧</Title>
       <Chart
             className="Chart"
             options={{
