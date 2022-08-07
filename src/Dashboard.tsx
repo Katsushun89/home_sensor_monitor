@@ -11,6 +11,7 @@ import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 import CO2s from './CO2s';
 import Chart from './Chart';
+import  { TemperatureChart, HurmidityChart, CO2Chart, PressureChart, SensorPowerChart } from './Charts';
 import Temperatures from './Temperatures';
 
 function Copyright(props: any) {
@@ -67,15 +68,17 @@ function DashboardContent() {
             overflow: 'auto',
           }}
         >
-          <Toolbar />
-            <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
+        <Toolbar />
+           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+              <Grid container spacing={3}>
+
               {/* Recent Temp. */}
               <Grid item xs={12}  md={6}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                   <Temperatures />
                 </Paper>
               </Grid>
+
               {/* Recent CO2 */}
               <Grid item xs={12} md={6}>
                 <Paper
@@ -89,30 +92,74 @@ function DashboardContent() {
                   <CO2s />
                 </Paper>
               </Grid>
-              {/* Chart */}
+
+              {/* TemperatureChart */}
               <Grid item xs={12} >
                 <Paper
                   sx={{
                     p: 2,
                     display: 'flex',
                     flexDirection: 'column',
-                    height: 450,
+                    height: 800,
                   }}
                 >
-                { <Chart /> }
+                { <TemperatureChart /> }
                 </Paper>
               </Grid>
-              {/* Chart */}
+
+              {/* HumidityChart */}
               <Grid item xs={12} >
                 <Paper
                   sx={{
                     p: 2,
                     display: 'flex',
                     flexDirection: 'column',
-                    height: 450,
+                    height: 800,
                   }}
                 >
-                { <Chart /> }
+                { <HurmidityChart /> }
+                </Paper>
+              </Grid>
+
+              {/* CO2Chart */}
+              <Grid item xs={12} >
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 800,
+                  }}
+                >
+                { <CO2Chart /> }
+                </Paper>
+              </Grid>
+
+              {/* PressureChart */}
+              <Grid item xs={12} >
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 800,
+                  }}
+                >
+                { <PressureChart /> }
+                </Paper>
+              </Grid>
+
+              {/* SensorPowerChart */}
+              <Grid item xs={12} >
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 800,
+                  }}
+                >
+                { <SensorPowerChart /> }
                 </Paper>
               </Grid>
 
