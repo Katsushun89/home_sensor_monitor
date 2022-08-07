@@ -11,6 +11,7 @@ import { Envsensor } from './API';
 import { CO2sensor } from './API';
 import { Prssensor } from './API';
 import subDays from 'date-fns/subDays'
+import Title from './Title';
 
 const chartHeight = '40%';
 
@@ -112,165 +113,241 @@ const getPrsSeries = (
             .map((m) => [m.timestamp * 1000, m[field]]), //convert javascript unixtime (*1000)
     }));
 
-const Charts = () => {
+const TemperatureChart = () => {
     const { envsensors, requestEnvsensors } = useEnvsensors();
+
+    useEffect(() => {
+        console.log("requestEnvsensors in TemperatureChart");
+        const now = new Date();
+        const previousDay = subDays(now, initialDaysRange);
+
+        requestEnvsensors(Math.floor(previousDay.getTime() / 1000),
+            Math.floor(now.getTime() / 1000),
+            500 * Object.keys(envsensorDeviceIdToRoom).length);
+    }, [requestEnvsensors]);
+
+    const commonOptions = useMemo(() => getCommonOptions(), []);
+
+    return (
+    <React.Fragment>
+        <Title>温度</Title>
+        <Chart
+            className="Chart"
+            options={{
+                ...commonOptions,
+                chart: {
+                    ...commonOptions.chart,
+                    id: 'temperature-chart',
+                },
+                yaxis: {
+                    ...commonOptions.yaxis,
+                    title: {
+                        text: '温度[℃]',
+                    },
+                },
+                tooltip: {
+                    ...commonOptions.tooltip,
+                    y: {
+                        formatter: (value) => `${value.toFixed(1)}℃`,
+                    },
+                },
+            }}
+            series={ getEnvSeries(envsensors, 'temperature') as ApexAxisChartSeries}
+            hegit={chartHeight}
+        />
+    </React.Fragment>
+    )
+}
+
+const HurmidityChart = () => {
+    const { envsensors, requestEnvsensors } = useEnvsensors();
+
+    useEffect(() => {
+        console.log("requestEnvsensors in HurmidityChart");
+        const now = new Date();
+        const previousDay = subDays(now, initialDaysRange);
+
+        requestEnvsensors(Math.floor(previousDay.getTime() / 1000),
+            Math.floor(now.getTime() / 1000),
+            500 * Object.keys(envsensorDeviceIdToRoom).length);
+    }, [requestEnvsensors]);
+
+    const commonOptions = useMemo(() => getCommonOptions(), []);
+
+    return (
+    <React.Fragment>
+        <Title>湿度</Title>
+        <Chart
+            className="Chart"
+            options={{
+                ...commonOptions,
+                chart: {
+                    ...commonOptions.chart,
+                    id: 'humidity-chart',
+                },
+                yaxis: {
+                    ...commonOptions.yaxis,
+                    title: {
+                        text: '湿度[%]',
+                    },
+                },
+                tooltip: {
+                    ...commonOptions.tooltip,
+                    y: {
+                        formatter: (value) => `${value.toFixed(1)}%`,
+                    },
+                },
+            }}
+            series={ getEnvSeries(envsensors, 'humidity') as ApexAxisChartSeries}
+            hegit={chartHeight}
+        />
+    </React.Fragment>
+    )
+}
+
+
+const CO2Chart = () => {
     const { co2sensors, requestCO2sensors } = useCO2sensors();
+
+    useEffect(() => {
+        console.log("requestCO2sensors in CO2Chart");
+        const now = new Date();
+        const previousDay = subDays(now, initialDaysRange);
+
+        requestCO2sensors(Math.floor(previousDay.getTime() / 1000),
+            Math.floor(now.getTime() / 1000),
+            500 * Object.keys(co2sensorDeviceIdToRoom).length);
+    }, [requestCO2sensors]);
+
+    const commonOptions = useMemo(() => getCommonOptions(), []);
+
+    return (
+    <React.Fragment>
+      <Title>CO2濃度</Title>
+      <Chart
+        className="Chart"
+        options={{
+            ...commonOptions,
+            chart: {
+                ...commonOptions.chart,
+                id: 'co2-concentration-chart',
+            },
+            yaxis: {
+                ...commonOptions.yaxis,
+                title: {
+                    text: 'CO2濃度[ppm]',
+                },
+            },
+            tooltip: {
+                ...commonOptions.tooltip,
+                y: {
+                    formatter: (value) => `${value.toFixed(1)}ppm`,
+                },
+            },
+        }}
+        series={ getCO2Series(co2sensors, 'concentration') as ApexAxisChartSeries}
+        hegit={chartHeight}
+        />
+      </React.Fragment>
+    )
+}
+
+const PressureChart = () => {
     const { prssensors, requestPrssensors } = usePrssensors();
 
     useEffect(() => {
-        console.log("requestEnvsensors");
+        console.log("requestPrssensors in PressureChart");
         const now = new Date();
-        const priviousDay = subDays(now, initialDaysRange);
+        const previousDay = subDays(now, initialDaysRange);
 
-        requestEnvsensors(Math.floor(priviousDay.getTime() / 1000),
-                            Math.floor(now.getTime() / 1000));
-    }, [requestEnvsensors]);
-
-    useEffect(() => {
-        console.log("requestCO2sensors");
-        const now = new Date();
-        const priviousDay = subDays(now, initialDaysRange);
-
-        requestCO2sensors(Math.floor(priviousDay.getTime() / 1000),
-                            Math.floor(now.getTime() / 1000));
-    }, [requestCO2sensors]);
-
-    useEffect(() => {
-        console.log("requestPrssensors");
-        const now = new Date();
-        const priviousDay = subDays(now, initialDaysRange);
-
-        requestPrssensors(Math.floor(priviousDay.getTime() / 1000),
-                            Math.floor(now.getTime() / 1000));
+        requestPrssensors(Math.floor(previousDay.getTime() / 1000),
+            Math.floor(now.getTime() / 1000),
+            500 * Object.keys(prssensorDeviceIdToRoom).length);
     }, [requestPrssensors]);
 
     const commonOptions = useMemo(() => getCommonOptions(), []);
 
     return (
-      <>
-            <Chart
-                className="Chart"
-                options={{
-                    ...commonOptions,
-                    chart: {
-                        ...commonOptions.chart,
-                        id: 'temperature-chart',
-                    },
-                    yaxis: {
-                        ...commonOptions.yaxis,
-                        title: {
-                            text: '温度[℃]',
-                        },
-                    },
-                    tooltip: {
-                        ...commonOptions.tooltip,
-                        y: {
-                            formatter: (value) => `${value.toFixed(1)}℃`,
-                        },
-                    },
-                }}
-                series={ getEnvSeries(envsensors, 'temperature') as ApexAxisChartSeries}
-                hegit={chartHeight}
-            />
-            <Chart
-                className="Chart"
-                options={{
-                    ...commonOptions,
-                    chart: {
-                        ...commonOptions.chart,
-                        id: 'humidity-chart',
-                    },
-                    yaxis: {
-                        ...commonOptions.yaxis,
-                        title: {
-                            text: '湿度[%]',
-                        },
-                    },
-                    tooltip: {
-                        ...commonOptions.tooltip,
-                        y: {
-                            formatter: (value) => `${value.toFixed(1)}%`,
-                        },
-                    },
-                }}
-                series={ getEnvSeries(envsensors, 'humidity') as ApexAxisChartSeries}
-                hegit={chartHeight}
-            />
-            <Chart
-                className="Chart"
-                options={{
-                    ...commonOptions,
-                    chart: {
-                        ...commonOptions.chart,
-                        id: 'co2-concentration-chart',
-                    },
-                    yaxis: {
-                        ...commonOptions.yaxis,
-                        title: {
-                            text: 'CO2濃度[ppm]',
-                        },
-                    },
-                    tooltip: {
-                        ...commonOptions.tooltip,
-                        y: {
-                            formatter: (value) => `${value.toFixed(1)}ppm`,
-                        },
-                    },
-                }}
-                series={ getCO2Series(co2sensors, 'concentration') as ApexAxisChartSeries}
-                hegit={chartHeight}
-            />
-            <Chart
-                className="Chart"
-                options={{
-                    ...commonOptions,
-                    chart: {
-                        ...commonOptions.chart,
-                        id: 'pressure-chart',
-                    },
-                    yaxis: {
-                        ...commonOptions.yaxis,
-                        title: {
-                            text: '気圧[hPa]',
-                        },
-                    },
-                    tooltip: {
-                        ...commonOptions.tooltip,
-                        y: {
-                            formatter: (value) => `${value.toFixed(1)}hPa`,
-                        },
-                    },
-                }}
-                series={ getPrsSeries(prssensors, 'pressure') as ApexAxisChartSeries}
-                hegit={chartHeight}
-            />
-            <Chart
-                className="Chart"
-                options={{
-                    ...commonOptions,
-                    chart: {
-                        ...commonOptions.chart,
-                        id: 'power-chart',
-                    },
-                    yaxis: {
-                        ...commonOptions.yaxis,
-                        title: {
-                            text: '電圧[mV]',
-                        },
-                    },
-                    tooltip: {
-                        ...commonOptions.tooltip,
-                        y: {
-                            formatter: (value) => `${value.toFixed(1)}mV`,
-                        },
-                    },
-                }}
-                series={ getEnvSeries(envsensors, 'power') as ApexAxisChartSeries}
-                hegit={chartHeight}
-            />
-        </>
+    <React.Fragment>
+      <Title>湿度</Title>
+      <Chart
+        className="Chart"
+        options={{
+          ...commonOptions,
+          chart: {
+            ...commonOptions.chart,
+            id: 'pressure-chart',
+          },
+          yaxis: {
+            ...commonOptions.yaxis,
+            title: {
+                text: '気圧[hPa]',
+            },
+          },
+          tooltip: {
+            ...commonOptions.tooltip,
+            y: {
+                formatter: (value) => `${value.toFixed(1)}hPa`,
+            },
+          },
+        }}
+        series={ getPrsSeries(prssensors, 'pressure') as ApexAxisChartSeries}
+        hegit={chartHeight}
+      />
+      </React.Fragment>
     )
 }
 
+const SensorPowerChart = () => {
+    const { envsensors, requestEnvsensors } = useEnvsensors();
 
-export default Charts;
+    useEffect(() => {
+        console.log("requestEnvsensors in SensorPowerChart");
+        const now = new Date();
+        const previousDay = subDays(now, initialDaysRange);
+
+        requestEnvsensors(Math.floor(previousDay.getTime() / 1000),
+            Math.floor(now.getTime() / 1000),
+            500 * Object.keys(envsensorDeviceIdToRoom).length);
+    }, [requestEnvsensors]);
+
+    const commonOptions = useMemo(() => getCommonOptions(), []);
+
+    return (
+    <React.Fragment>
+      <Title>センサーバッテリー電圧</Title>
+      <Chart
+            className="Chart"
+            options={{
+                ...commonOptions,
+                chart: {
+                    ...commonOptions.chart,
+                    id: 'power-chart',
+                },
+                yaxis: {
+                    ...commonOptions.yaxis,
+                    title: {
+                        text: '電圧[mV]',
+                    },
+                },
+                tooltip: {
+                    ...commonOptions.tooltip,
+                    y: {
+                        formatter: (value) => `${value.toFixed(1)}mV`,
+                    },
+                },
+            }}
+            series={ getEnvSeries(envsensors, 'power') as ApexAxisChartSeries}
+            hegit={chartHeight}
+            />
+      </React.Fragment>
+    )
+}
+
+export {
+    TemperatureChart,
+    HurmidityChart,
+    CO2Chart,
+    PressureChart,
+    SensorPowerChart,
+};

@@ -12,20 +12,20 @@ import { timeStamp } from "console";
 
 export const usePrssensors = (): {
     prssensors: readonly Prssensor[];
-    requestPrssensors: (from: number, to: number) => Promise<void>;
+    requestPrssensors: (from: number, to: number, limit: number) => Promise<void>;
 } => {
     const [prssensors, setPrssensors] = useState<readonly Prssensor[]>([]);
     const now = new Date();
     const timestampMin = useRef(Math.floor(now.getTime() / 1000));
     
-    const requestPrssensors = useCallback(async (from: number, to: number) => {
+    const requestPrssensors = useCallback(async (from: number, to: number, limit: number) => {
         if (from >= timestampMin.current) {
             return;
         }
 
         const variables = {
             type: 'Prssensor',
-            limit: 500,
+            limit: limit,
             sortDirection: 'ASC',
             timestamp: {between: [from, to]},
         } as ByPrsTimestampQueryVariables
