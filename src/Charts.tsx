@@ -269,7 +269,7 @@ const PressureChart = () => {
 
     return (
     <React.Fragment>
-      <Title>湿度</Title>
+      <Title>気圧</Title>
       <Chart
         className="Chart"
         options={{

@@ -17,7 +17,7 @@ function Copyright(props: any) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://https://github.com/katsushun89/">
+      <Link color="inherit" href="https://github.com/katsushun89/">
         katsushun89
       </Link>{' '}
       {new Date().getFullYear()}
@@ -69,7 +69,7 @@ function DashboardContent() {
         >
         <Toolbar />
            <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-              <Grid container spacing={3}>
+              <Grid container spacing={1}>
 
               {/* Recent Temp. */}
               <Grid item xs={12}  md={6}>
