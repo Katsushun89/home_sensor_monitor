@@ -10,7 +10,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 import  { TemperatureChart, HurmidityChart, CO2Chart, PressureChart, SensorPowerChart } from './Charts';
-import RecentTemperatures from './RecentTemperature';
+import RecentTemperature from './RecentTemperature';
 import RecentCO2 from './RecentCO2';
 
 function Copyright(props: any) {
@@ -74,7 +74,7 @@ function DashboardContent() {
               {/* Recent Temp. */}
               <Grid item xs={12}  md={6}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <RecentTemperatures />
+                  <RecentTemperature />
                 </Paper>
               </Grid>
 

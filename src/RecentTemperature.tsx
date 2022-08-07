@@ -42,20 +42,21 @@ function preventDefault(event: React.MouseEvent) {
   event.preventDefault();
 }
 
-export default function RecentTemperatures() {
+export default function RecentTemperature() {
     const { envsensors, requestEnvsensors } = useEnvsensors();
 
     useEffect(() => {
         console.log("requestEnvsensors in RecentTemperature");
         const now = new Date();
-        const previousDay = subDays(now, 1);
+        let previousDate = new Date();
+        previousDate.setMinutes(previousDate.getMinutes() - 10) //minus 10min
 
-        requestEnvsensors(Math.floor((previousDay.getTime()) / 1000),
+        requestEnvsensors(Math.floor((previousDate.getTime()) / 1000),
             Math.floor(now.getTime() / 1000),
-            8 * Object.keys(envsensorDeviceIdToRoom).length);
+            2 * Object.keys(envsensorDeviceIdToRoom).length);
     }, [requestEnvsensors]);
 
-    console.log("called RecentTemperatures")
+    console.log("called RecentTemperature")
 
   return (
     <React.Fragment>

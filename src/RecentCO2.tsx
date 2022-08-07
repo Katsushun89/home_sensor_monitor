@@ -42,11 +42,12 @@ export default function RecentCO2() {
     useEffect(() => {
         console.log("requestCO2sensors in CO2Chart");
         const now = new Date();
-        const previousDay = subDays(now, 1);
+        let previousDate = new Date();
+        previousDate.setMinutes(previousDate.getMinutes() - 10) //minus 10min
 
-        requestCO2sensors(Math.floor(previousDay.getTime() / 1000),
+        requestCO2sensors(Math.floor(previousDate.getTime() / 1000),
             Math.floor(now.getTime() / 1000),
-            8 * Object.keys(co2sensorDeviceIdToRoom).length);
+            2 * Object.keys(co2sensorDeviceIdToRoom).length);
     }, [requestCO2sensors]);
 
     console.log("called RecentCO2")
