@@ -117,11 +117,11 @@ const TemperatureChart = () => {
     const { envsensors, requestEnvsensors } = useEnvsensors();
 
     useEffect(() => {
-        console.log("requestEnvsensors");
+        console.log("requestEnvsensors in TemperatureChart");
         const now = new Date();
-        const priviousDay = subDays(now, initialDaysRange);
+        const previousDay = subDays(now, initialDaysRange);
 
-        requestEnvsensors(Math.floor(priviousDay.getTime() / 1000),
+        requestEnvsensors(Math.floor(previousDay.getTime() / 1000),
             Math.floor(now.getTime() / 1000),
             500 * Object.keys(envsensorDeviceIdToRoom).length);
     }, [requestEnvsensors]);
@@ -163,11 +163,11 @@ const HurmidityChart = () => {
     const { envsensors, requestEnvsensors } = useEnvsensors();
 
     useEffect(() => {
-        console.log("requestEnvsensors");
+        console.log("requestEnvsensors in HurmidityChart");
         const now = new Date();
-        const priviousDay = subDays(now, initialDaysRange);
+        const previousDay = subDays(now, initialDaysRange);
 
-        requestEnvsensors(Math.floor(priviousDay.getTime() / 1000),
+        requestEnvsensors(Math.floor(previousDay.getTime() / 1000),
             Math.floor(now.getTime() / 1000),
             500 * Object.keys(envsensorDeviceIdToRoom).length);
     }, [requestEnvsensors]);
@@ -210,11 +210,11 @@ const CO2Chart = () => {
     const { co2sensors, requestCO2sensors } = useCO2sensors();
 
     useEffect(() => {
-        console.log("requestCO2sensors");
+        console.log("requestCO2sensors in CO2Chart");
         const now = new Date();
-        const priviousDay = subDays(now, initialDaysRange);
+        const previousDay = subDays(now, initialDaysRange);
 
-        requestCO2sensors(Math.floor(priviousDay.getTime() / 1000),
+        requestCO2sensors(Math.floor(previousDay.getTime() / 1000),
             Math.floor(now.getTime() / 1000),
             500 * Object.keys(co2sensorDeviceIdToRoom).length);
     }, [requestCO2sensors]);
@@ -256,11 +256,11 @@ const PressureChart = () => {
     const { prssensors, requestPrssensors } = usePrssensors();
 
     useEffect(() => {
-        console.log("requestPrssensors");
+        console.log("requestPrssensors in PressureChart");
         const now = new Date();
-        const priviousDay = subDays(now, initialDaysRange);
+        const previousDay = subDays(now, initialDaysRange);
 
-        requestPrssensors(Math.floor(priviousDay.getTime() / 1000),
+        requestPrssensors(Math.floor(previousDay.getTime() / 1000),
             Math.floor(now.getTime() / 1000),
             500 * Object.keys(prssensorDeviceIdToRoom).length);
     }, [requestPrssensors]);
@@ -302,11 +302,11 @@ const SensorPowerChart = () => {
     const { envsensors, requestEnvsensors } = useEnvsensors();
 
     useEffect(() => {
-        console.log("requestEnvsensors");
+        console.log("requestEnvsensors in SensorPowerChart");
         const now = new Date();
-        const priviousDay = subDays(now, initialDaysRange);
+        const previousDay = subDays(now, initialDaysRange);
 
-        requestEnvsensors(Math.floor(priviousDay.getTime() / 1000),
+        requestEnvsensors(Math.floor(previousDay.getTime() / 1000),
             Math.floor(now.getTime() / 1000),
             500 * Object.keys(envsensorDeviceIdToRoom).length);
     }, [requestEnvsensors]);
