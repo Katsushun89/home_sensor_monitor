@@ -53,7 +53,7 @@ export default function RecentTemperature() {
 
         requestEnvsensors(Math.floor((previousDate.getTime()) / 1000),
             Math.floor(now.getTime() / 1000),
-            2 * Object.keys(envsensorDeviceIdToRoom).length);
+            3 * Object.keys(envsensorDeviceIdToRoom).length);
     }, [requestEnvsensors]);
 
     console.log("called RecentTemperature")
