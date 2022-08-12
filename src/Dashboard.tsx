@@ -73,7 +73,11 @@ function DashboardContent() {
 
               {/* Recent Temp. */}
               <Grid item xs={12}  md={6}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                  <Paper sx={{
+                      p: { xs: 1, sm: 2 },
+                      display: 'flex',
+                      flexDirection: 'column'
+                  }}>
                   <RecentTemperature />
                 </Paper>
               </Grid>
@@ -82,7 +86,7 @@ function DashboardContent() {
               <Grid item xs={12} md={6}>
                 <Paper
                   sx={{
-                    p: 2,
+                    p: { xs: 1, sm: 2 },
                     display: 'flex',
                     flexDirection: 'column',
                     height: 240,
@@ -96,10 +100,10 @@ function DashboardContent() {
               <Grid item xs={12} >
                 <Paper
                   sx={{
-                    p: 2,
+                    p: { xs: 1, sm: 2 },
                     display: 'flex',
                     flexDirection: 'column',
-                    height: 800,
+                    height: { xs: 280, sm: 600, md:800 },
                   }}
                 >
                 { <TemperatureChart /> }
@@ -110,10 +114,10 @@ function DashboardContent() {
               <Grid item xs={12} >
                 <Paper
                   sx={{
-                    p: 2,
+                    p: { xs: 1, sm: 2 },
                     display: 'flex',
                     flexDirection: 'column',
-                    height: 800,
+                    height: { xs: 280, sm: 600, md:800 },
                   }}
                 >
                 { <HurmidityChart /> }
@@ -124,10 +128,10 @@ function DashboardContent() {
               <Grid item xs={12} >
                 <Paper
                   sx={{
-                    p: 2,
+                    p: { xs: 1, sm: 2 },
                     display: 'flex',
                     flexDirection: 'column',
-                    height: 800,
+                    height: { xs: 280, sm: 600, md:800 },
                   }}
                 >
                 { <CO2Chart /> }
@@ -138,10 +142,10 @@ function DashboardContent() {
               <Grid item xs={12} >
                 <Paper
                   sx={{
-                    p: 2,
+                    p: { xs: 1, sm: 2 },
                     display: 'flex',
                     flexDirection: 'column',
-                    height: 800,
+                    height: { xs: 280, sm: 600, md:800 },
                   }}
                 >
                 { <PressureChart /> }
@@ -152,10 +156,10 @@ function DashboardContent() {
               <Grid item xs={12} >
                 <Paper
                   sx={{
-                    p: 2,
+                    p: { xs: 1, sm: 2 },
                     display: 'flex',
                     flexDirection: 'column',
-                    height: 800,
+                    height: { xs: 280, sm: 600, md:800 },
                   }}
                 >
                 { <SensorPowerChart /> }

@@ -1,11 +1,11 @@
 .Charts {
-    margin: 0 20px 10px 20px;
+    margin: 0 10px 5px 10px;
 
 }
 
 @media (max-width: 600px){
     .Chart {
-        margin: 0 4px 15px 3px;
+        margin: 0 0px 8px 0px;
     }
 }
 
