@@ -8,13 +8,13 @@ import Title from './Title';
 import { useEnvsensors } from './useEnvsensors';
 import { Envsensor } from './API';
 import { useEffect } from 'react';
-import subDays from 'date-fns/subDays'
 
 const envsensorDeviceIdToRoom = {
     'palamb0001': '寝室',
     'twelaria0002': '玄関',
     'twelaria0003': 'リビング',
     'twelaria0004': '屋外',
+    'twelaria0005': 'レオパ',
 };
 
 const getEnvSeries = (
@@ -49,7 +49,7 @@ export default function RecentTemperature() {
         console.log("requestEnvsensors in RecentTemperature");
         const now = new Date();
         let previousDate = new Date();
-        previousDate.setMinutes(previousDate.getMinutes() - 10) //minus 10min
+        previousDate.setMinutes(previousDate.getMinutes() - 15) //minus 10min
 
         requestEnvsensors(Math.floor((previousDate.getTime()) / 1000),
             Math.floor(now.getTime() / 1000),

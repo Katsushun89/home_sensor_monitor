@@ -43,7 +43,7 @@ export default function RecentCO2() {
         console.log("requestCO2sensors in CO2Chart");
         const now = new Date();
         let previousDate = new Date();
-        previousDate.setMinutes(previousDate.getMinutes() - 10) //minus 10min
+        previousDate.setMinutes(previousDate.getMinutes() - 15) //minus 10min
 
         requestCO2sensors(Math.floor(previousDate.getTime() / 1000),
             Math.floor(now.getTime() / 1000),

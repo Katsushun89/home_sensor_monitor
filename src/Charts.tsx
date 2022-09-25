@@ -20,6 +20,7 @@ const envsensorDeviceIdToRoom = {
     'twelaria0002': '玄関',
     'twelaria0003': 'リビング',
     'twelaria0004': '屋外',
+    'twelaria0005': 'レオパ',
 };
 
 const co2sensorDeviceIdToRoom = {

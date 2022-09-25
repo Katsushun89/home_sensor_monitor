@@ -12,6 +12,7 @@ import Link from '@mui/material/Link';
 import  { TemperatureChart, HurmidityChart, CO2Chart, PressureChart, SensorPowerChart } from './Charts';
 import RecentTemperature from './RecentTemperature';
 import RecentCO2 from './RecentCO2';
+import RecentLeopard from './RecentLeopard';
 
 function Copyright(props: any) {
   return (
@@ -72,7 +73,7 @@ function DashboardContent() {
               <Grid container spacing={1}>
 
               {/* Recent Temp. */}
-              <Grid item xs={12}  md={6}>
+              <Grid item xs={10}  md={4}>
                   <Paper sx={{
                       p: { xs: 1, sm: 2 },
                       display: 'flex',
@@ -83,7 +84,7 @@ function DashboardContent() {
               </Grid>
 
               {/* Recent CO2 */}
-              <Grid item xs={12} md={6}>
+              <Grid item xs={6} md={3}>
                 <Paper
                   sx={{
                     p: { xs: 1, sm: 2 },
@@ -93,6 +94,20 @@ function DashboardContent() {
                   }}
                 >
                   <RecentCO2 />
+                </Paper>
+              </Grid>
+
+              {/* Recent Leopard */}
+              <Grid item xs={6} md={3}>
+                <Paper
+                  sx={{
+                    p: { xs: 1, sm: 2 },
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 240,
+                  }}
+                >
+                  <RecentLeopard />
                 </Paper>
               </Grid>
 
